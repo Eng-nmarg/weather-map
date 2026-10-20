@@ -1,0 +1,127 @@
+const input= document.getElementById("country-inp");
+const search= document.getElementById("search-btn");
+ const map_container= document.querySelector("map-container");
+
+
+
+//
+const default_coords= [30.0444 , 31.2357];
+const zoom=6;
+
+
+// create map 
+const map = L.map(map_container);
+map.setView(default_coords , zoom);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    zoom:19,
+    attribution:'hhhhhhhh'
+
+}).addTo(map);
+
+let marker, circle
+
+async function map_weather(contryName){
+    if(!contryName.value .trim()){
+alart("Enter the valid contry");
+    return;
+
+    }
+    
+
+    try{
+        const resp = await fatch('gggggggdg');
+        if(!resp.ok){
+            throw new Error( 'contry not found');
+
+        }//en if
+
+        const jsonData =await resp. json();
+
+
+        ///data
+        const lat = jsonData.coords.latitude;
+        const long = jsonData.coords.longitude;
+        const accuracy = jsonData.coords.accuracy;
+
+       
+        const temp = Math.round(jsonData.main.temp)+"c" || "N/A";
+        const wind_speed = jsonData.wind.speed+"Km/h"||"N/A";
+        const humidity = jsonData.main.humidity+"%"||"N/A";
+        const clouds = jsonData.weather[0].main||"N/A";
+        const icon = jsonData.weather[0].icon||"N/A";
+        const weather_status = jsonData.weather[0].discription||"N/A";
+        const name = jsonData.name||"N/A";
+        
+        if(marker){
+            map.removeLayer(marker);
+            map.removeLayer(circle);
+
+        }
+       marker= L.marker([lat , long]).addTo(map);
+       circle= L.circle([at , long] ,{radius: accuracy}).addTo(map);
+
+
+       //if for zoom
+
+       //invok method
+       loading_location(lat , lng ,accuracy, name , temp ,humidity,wind_speed ,clouds ,weather_status ) 
+
+
+
+    }
+
+    catch{
+
+    }
+
+
+}
+
+search.addEventListener("click", () =>{
+
+    const searchCountry = input .value.trim();
+
+});
+
+
+function loading_location(lat , lng , name , temp ,humidity,wind ,clouds ,weather_status ){
+    map.setView([lat , lng] ,6);
+    const popup= `
+    <div>
+    <div class="name"><h2>${name}</h2> </div>
+    <div class="weather-icon"> <img src="image/sun.png" alt=""></div>
+    <div class="discrip"> <h3>${weather_status}</h3></div>
+
+    <div class="temp">
+        <img src="image/temperature.svg" alt="">
+         <span>${temp}</span>
+
+    </div>
+    <div class="clouds">
+        <img src="image/cloud.svg" alt="">
+         <span>${clouds} </span>
+
+    </div>
+
+    <div class="info">
+        <div class="wind">
+            <img src="image/wind.png" alt="">
+            <span>${wind}</span>
+        </div>
+        <div class="hum">
+          <img src="image/humidity.png" alt="">
+          <span>${humidity}</span>
+
+        </div>
+
+          
+</div>
+    `;
+    marker= L.marker([lat , long]).addTo(map);
+    circle= L.circle([at , long] ,{radius: accuracy}).addTo(map);
+
+    marker.bindPopup.popup.openPopup();
+
+
+}
+

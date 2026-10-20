@@ -3,109 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>weather map</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
 </head>
 <body>
     <div class="container">
-        <div class="content">
-              <div class="search">
-                    <input type="text"id="country-inp" placeholder="Enter a country name here..." />
-                    <button id="search-btn"><img src="image/search.png" alt=""></button>
-              </div>
-             
-              <div class="contery-info">
-                  <div class="weather-icon"> <img src="image/sun.png" alt=""></div>
+        <!--1-->
 
-                  <div class="date">today 14 oct</div>
+        <div class="con1">
+            <!--section1-->
+            <div class="search">
+                <input type="text"id="country-inp" placeholder="Enter a country name here..." />
+                <button id="search-btn"><img src="image/search.png" alt=""wi></button>
+            </div>
+            <!--section2--->
+            <div class="map-container" style="height: 400px; width:100%;">
 
-                  <div class="temp">
-                      <img src="image/temperature.svg" alt="">
-                       <span>34°c</span>
+            </div>
+             <!--section2--->
+        </div>
+        <!--2-->
+        
+        <!--2-->
+        <div class="con2">
+            <div class="map-weather-info"> 
+                <!---->
+                <div class="extra">
+                    <span>Contry</span>
+                        <button class="btn-1"> </button>
+                        <button class="btn-2">save as favorit</button>
+    
+                    </div>
 
-                  </div>
-                  <div class="info">
-                      <div class="wind">
-                          <img src="image/wind.png" alt="">
-                          <span>34%</span>
-                      </div>
-                      <div class="hum">
-                        <img src="image/humidity.png" alt="">
-                        <span>45 K/h</span>
+                    <div class="weather-info">
 
-                      </div>
-                  </div>
+                        <div class="wrapper">
+                             <div class = "data-wrapper"> 
+                             <h4> Capital </h4>
+                             <span> ${capital} </span>
+         
+                             </div>
+                         </div>
+         
+                         <div class="wrapper">
+                             <div class = "data-wrapper"> 
+                               <h4> Capital </h4>
+                               <span> ${capital} </span>
+                     
+                             </div>
+                           </div>
+         
+                           <div class="wrapper">
+                             <div class = "data-wrapper"> 
+                               <h4> Capital </h4>
+                               <span> ${capital} </span>
+                     
+                             </div>
+                           </div>
+         
+                           <div class="wrapper">
+                             <div class = "data-wrapper"> 
+                               <h4> Capital </h4>
+                               <span> ${capital} </span>
+                     
+                             </div>
+                           </div>
+         
+                         </div>
 
-                       
 
 
-               </div>
 
 
-               
+
+
+            </div>
+
+
+
+
+
+
         </div>
 
 
-         
-       
-     
-   
-        <div class="map-weather-info">
-            <div class="extra">
-                <span>Contry</span>
-                    <button class="btn-1"> </button>
-                    <button class="btn-2">save as favorit</button>
+        <!---->
 
-                </div>
-            <div class="map"><img src="image/map.jpg" alt="" height="300" width="auto">
-                
-            </div>
 
-            <div class="weather-info">
 
-               <div class="wrapper">
-                    <div class = "data-wrapper"> 
-                    <h4> Capital </h4>
-                    <span> ${capital} </span>
 
-                    </div>
-                </div>
 
-                <div class="wrapper">
-                    <div class = "data-wrapper"> 
-                      <h4> Capital </h4>
-                      <span> ${capital} </span>
-            
-                    </div>
-                  </div>
 
-                  <div class="wrapper">
-                    <div class = "data-wrapper"> 
-                      <h4> Capital </h4>
-                      <span> ${capital} </span>
-            
-                    </div>
-                  </div>
 
-                  <div class="wrapper">
-                    <div class = "data-wrapper"> 
-                      <h4> Capital </h4>
-                      <span> ${capital} </span>
-            
-                    </div>
-                  </div>
 
-                </div>
-           
+
+
+
+
+
+
+
 
     </div>
-    </div>
-   
-   
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-    
-     
     
 </body>
 </html>
+
