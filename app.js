@@ -18,8 +18,9 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
 
 }).addTo(map);
 
-let marker, circle
+let marker, circle;
 
+const apikey='71c63bc7e4c006803628174de0c9decb';
 async function map_weather(contryName){
     if(!contryName.value .trim()){
 alart("Enter the valid contry");
