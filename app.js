@@ -1,6 +1,9 @@
 const input= document.getElementById("country-inp");
 const search= document.getElementById("search-btn");
  const map_container= document.getElementById("map-container");
+ const contryName= document.getElementById("contryName");
+ const save= document.getElementsByClassName("btn-1");
+ 
 
 
 
@@ -16,20 +19,46 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
     attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
 }).addTo(map);
+//L.marker(default_coords,zoom).addTo(map);
+//L.circle(default_coords ,zoom).addTo(map);
+
+
+
+
 
 let marker, circle;
 
-const apikey='71c63bc7e4c006803628174de0c9decb';
+
+const apikey=`71c63bc7e4c006803628174de0c9decb`;
  async function map_weather(contryName){
-    if(!contryName.value .trim()){
-alart("Enter the valid contry");
+ //   console.log(contryName.value.trim());
+
+    if(!contryName||!contryName.trim()){
+alert("Enter the valid contry");
     return;
 
     }
     
 
     try{
-        const resp = await fetch('gggggggdg');
+        const gurll =`https://api.openweathermap.org/geo/1.0/direct?q=${contryName.trim()}&limit=1&appid=${apikey}`;
+        const mm = await fetch(gurll);
+        const goc =await mm.json();
+
+        if(goc.length===0){
+            throw new Error( 'contry not found weather data');
+
+        }//en if
+
+        const lat = goc[0].lat;
+        const lng =goc[0].lon;
+        const name = goc[0].name;
+        const accuracy = 1500;
+
+
+
+        const urll=`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apikey}&units=metric`;
+        const resp = await fetch(urll);
         if(!resp.ok){
             throw new Error( 'contry not found');
 
@@ -39,9 +68,7 @@ alart("Enter the valid contry");
 
 
         ///data
-        const lat = jsonData.coords.latitude;
-        const lng = jsonData.coords.longitude;
-        const accuracy = jsonData.coords.accuracy;
+        
 
        
         const temp = Math.round(jsonData.main.temp)+"c" || "N/A";
@@ -49,17 +76,17 @@ alart("Enter the valid contry");
         const humidity = jsonData.main.humidity+"%"||"N/A";
         const clouds = jsonData.weather[0].main||"N/A";
         const icon = jsonData.weather[0].icon||"N/A";
-        const weather_status = jsonData.weather[0].discription||"N/A";
-        const name = jsonData.name||"N/A";
+        const weather_status = jsonData.weather[0].description||"N/A";
         
-        if(marker){
+        
+   if(marker){
             map.removeLayer(marker);
             map.removeLayer(circle);
 
         }
-       marker= L.marker([lat , lng]).addTo(map);
-       circle= L.circle([lat , lng] ,{radius: accuracy}).addTo(map);
-
+        marker= L.marker([lat , lng]).addTo(map);
+      circle= L.circle([lat , lng] ,{radius: accuracy}).addTo(map);
+ 
 
        //if for zoom
 
@@ -78,11 +105,12 @@ alart("Enter the valid contry");
 }
  
 
-search.addEventListener("click", () =>{
-
-    const searchCountry = input .value.trim();
-   // ProgressEvent
-    map_weather(searchCountry);
+search.addEventListener("click", (e) =>{
+     e.preventDefault();
+    const searchCountry = input.value;
+    console.log(searchCountry);
+    contryName.innerText=searchCountry;
+    map_weather(input.value);
 
 });
 
@@ -90,7 +118,7 @@ search.addEventListener("click", () =>{
 function loading_location(lat , lng , name , temp ,humidity,wind ,clouds ,weather_status ){
     map.setView([lat , lng] ,6);
     const popup= `
-    <div>
+    <div class="pop">
     <div class="name"><h2>${name}</h2> </div>
     <div class="weather-icon"> <img src="image/sun.png" alt=""></div>
     <div class="discrip"> <h3>${weather_status}</h3></div>
@@ -115,16 +143,24 @@ function loading_location(lat , lng , name , temp ,humidity,wind ,clouds ,weathe
           <img src="image/humidity.png" alt="">
           <span>${humidity}</span>
 
-        </div>
-
-          
+        </div>      
 </div>
     `;
-    marker= L.marker([lat , long]).addTo(map);
-    circle= L.circle([at , long] ,{radius: accuracy}).addTo(map);
+   
+    
+    marker= L.marker([lat , lng]).addTo(map).bindPopup(popup).openPopup();
+    circle= L.circle([lat , lng] ,{radius: accuracy}).addTo(map);
 
-    marker.bindPopup.popup.openPopup();
+  //  marker.bindPopup(popup).openPopup();
 
 
 }
+
+//--------------
+ 
+function saveton(searchCountry){
+
+  //  const store= localStorage.getItem
+}
+
 
