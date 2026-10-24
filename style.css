@@ -9,7 +9,7 @@ url();
   
 }
 body{
-  background-color: #f4f716;
+  background-color: #62625c;
   color: #333333;
   min-height: 100vh;
   padding: 20px;
@@ -36,6 +36,8 @@ body{
 .con2{
   flex: 1;
   display: flex;
+  justify-content: center;
+
   flex-direction: column;
   gap: 20px;
   
@@ -160,4 +162,144 @@ body{
 
 }
 
-/**/
+/*popUp*/
+.pop{
+
+  color: #ffffff;
+  padding: 2opx ;
+  border-radius: 16px;
+
+  width:260px;
+  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.name h2{
+  margin: 0;
+  font-size: 18;
+  font-weight: 700;
+  color: #2b6cb0;
+  letter-spacing: 0.05px;
+
+}
+.weather-icon img{
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin: 4px 0;
+  filter: drop-shadow(0 4px 6px);
+
+}
+.discrip h3{
+  margin: 0;
+  font-size: 18;
+  font-weight: 700;
+  color: #2b6cb0;
+  text-transform: capitalize;
+
+}
+.temp{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+
+
+}
+ .temp img{
+   width: 24px;
+   height: 24px;
+
+
+}
+.temp span{
+  font-size: 18;
+  font-weight: 700;
+  color: #2b6cb0;
+}
+
+.clouds{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 18;
+  
+  color: #2b6cb0;
+
+
+}
+.clouds img{
+  width: 24px;
+  height: 24px;
+  opacity: 0.8;
+}
+
+.info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(red, green, blue, 0.1);
+} 
+
+.wind ,.hum{
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 18;
+  
+  color: #2b6cb0;
+
+}
+.wind img ,.hum img{
+  width: 24px;
+  height: 24px;
+ object-fit: contain;
+
+}
+
+.box{
+
+}
+.day{
+  background-color: 0;
+}
+
+@media(max-width:900px){
+  .container{
+    flex-direction: column;
+  }
+  .map-container{
+    height: 50vh;
+
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

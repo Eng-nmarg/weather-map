@@ -3,6 +3,7 @@ const search= document.getElementById("search-btn");
  const map_container= document.getElementById("map-container");
  const contryName= document.getElementById("contryName");
  const save= document.getElementsByClassName("btn-1");
+ const box= document.getElementById("box");
  
 
 
@@ -91,9 +92,8 @@ alert("Enter the valid contry");
        //if for zoom
 
        //invok method
-       loading_location(lat , lng ,accuracy, name , temp ,humidity,wind_speed ,clouds ,weather_status ) 
-
-
+       loading_location(lat , lng ,accuracy, name ,icon,  temp ,humidity,wind_speed ,clouds ,weather_status ) 
+       days(lat , lng ,accuracy, name ,icon, temp ,humidity,wind_speed ,clouds ,weather_status );
 
     }
 
@@ -110,26 +110,65 @@ search.addEventListener("click", (e) =>{
     const searchCountry = input.value;
     console.log(searchCountry);
     contryName.innerText=searchCountry;
+    
     map_weather(input.value);
 
 });
 
 
-function loading_location(lat , lng , name , temp ,humidity,wind ,clouds ,weather_status ){
+function days(lat , lng ,accuracy, name ,icon, temp ,humidity,wind_speed ,clouds ,weather_status ){
+    box.innerText=temp;
+    box.innerHTML=` 
+    <div class="day">
+    <div class="discrip">weather_status : <h3>${weather_status}</h3></div>
+  
+    <div class="temp">
+        <img src="image/temperature.svg" alt="">
+         <span>temp : ${temp}</span>
+  
+    </div>
+    <div class="clouds">
+        <img src="image/cloude.png" alt="">
+         <span>${clouds} </span>
+  
+    </div>
+  
+    <div class="info">
+        <div class="wind">
+            <img src="image/wind.png" alt="">
+            <span>${wind_speed}</span>
+        </div>
+        <div class="hum">
+          <img src="image/humidity.png" alt="">
+          <span>${humidity}</span>
+  
+        </div>
+        </div>  
+
+  
+     
+    
+    
+  `;
+
+}
+
+
+
+function loading_location(lat , lng ,accuracy, name ,icon, temp ,humidity,wind_speed ,clouds ,weather_status ){
     map.setView([lat , lng] ,6);
     const popup= `
     <div class="pop">
-    <div class="name"><h2>${name}</h2> </div>
-    <div class="weather-icon"> <img src="image/sun.png" alt=""></div>
+    
     <div class="discrip"> <h3>${weather_status}</h3></div>
-
+    <img src=${icon} alt="">
     <div class="temp">
         <img src="image/temperature.svg" alt="">
          <span>${temp}</span>
 
     </div>
     <div class="clouds">
-        <img src="image/cloud.svg" alt="">
+        <img src="image/cloude.png" alt="">
          <span>${clouds} </span>
 
     </div>
@@ -137,7 +176,7 @@ function loading_location(lat , lng , name , temp ,humidity,wind ,clouds ,weathe
     <div class="info">
         <div class="wind">
             <img src="image/wind.png" alt="">
-            <span>${wind}</span>
+            <span>${wind_speed}</span>
         </div>
         <div class="hum">
           <img src="image/humidity.png" alt="">
@@ -147,6 +186,7 @@ function loading_location(lat , lng , name , temp ,humidity,wind ,clouds ,weathe
 </div>
     `;
    
+
     
     marker= L.marker([lat , lng]).addTo(map).bindPopup(popup).openPopup();
     circle= L.circle([lat , lng] ,{radius: accuracy}).addTo(map);
