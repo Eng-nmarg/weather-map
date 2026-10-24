@@ -1,6 +1,6 @@
 const input= document.getElementById("country-inp");
 const search= document.getElementById("search-btn");
- const map_container= document.querySelector("map-container");
+ const map_container= document.getElementById("map-container");
 
 
 
@@ -10,18 +10,17 @@ const zoom=6;
 
 
 // create map 
-const map = L.map(map_container);
-map.setView(default_coords , zoom);
+const map = L.map(map_container).setView(default_coords , zoom);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
     zoom:19,
-    attribution:'hhhhhhhh'
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
 }).addTo(map);
 
 let marker, circle;
 
 const apikey='71c63bc7e4c006803628174de0c9decb';
-async function map_weather(contryName){
+ async function map_weather(contryName){
     if(!contryName.value .trim()){
 alart("Enter the valid contry");
     return;
@@ -30,7 +29,7 @@ alart("Enter the valid contry");
     
 
     try{
-        const resp = await fatch('gggggggdg');
+        const resp = await fetch('gggggggdg');
         if(!resp.ok){
             throw new Error( 'contry not found');
 
@@ -41,7 +40,7 @@ alart("Enter the valid contry");
 
         ///data
         const lat = jsonData.coords.latitude;
-        const long = jsonData.coords.longitude;
+        const lng = jsonData.coords.longitude;
         const accuracy = jsonData.coords.accuracy;
 
        
@@ -58,8 +57,8 @@ alart("Enter the valid contry");
             map.removeLayer(circle);
 
         }
-       marker= L.marker([lat , long]).addTo(map);
-       circle= L.circle([at , long] ,{radius: accuracy}).addTo(map);
+       marker= L.marker([lat , lng]).addTo(map);
+       circle= L.circle([lat , lng] ,{radius: accuracy}).addTo(map);
 
 
        //if for zoom
@@ -77,10 +76,13 @@ alart("Enter the valid contry");
 
 
 }
+ 
 
 search.addEventListener("click", () =>{
 
     const searchCountry = input .value.trim();
+   // ProgressEvent
+    map_weather(searchCountry);
 
 });
 
